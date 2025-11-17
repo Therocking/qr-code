@@ -1,0 +1,24 @@
+name: Build and publish docker image
+
+on:
+    [workflow_dispatch]
+    # push:
+    #     branches: ["main"]
+
+env:
+    USER_NAME: therocking
+    API_IMAGE_NAME: qr-code-api
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        
+        steps:
+            - name: Checkout
+              uses: checkout@v4
+            
+            - name: Build image
+              uses: docker build ./api/ -t ${{ env.USER_NAME }}/${{ env.API_IMAGE_NAME }}:latest
+
+            - name: Publish docker image
+              run: docker push ${{ env.USER_NAME }}/${{ env.API_IMAGE_NAME }}:latest
