@@ -8,6 +8,7 @@ on:
 env:
   USER_NAME: therocking
   API_IMAGE_NAME: qr-code-api
+  FRONTEND_IMAGE_NAME: qr-code-frontend
 
 jobs:
   build:
@@ -20,8 +21,10 @@ jobs:
       - name: Build image
         run: |
           docker build -f api/Dockerfile -t ${{ env.USER_NAME }}/${{ env.API_IMAGE_NAME }}:latest .
+          docker build -f front-end-nextjs/Dockerfile -t ${{ env.USER_NAME }}/${{ env.FRONTEND_IMAGE_NAME }}:latest .
 
       - name: Publish docker image
         run: |
             docker login -u ${{ env.USER_NAME }} -p ${{ secrets.DOCKER_HUB_SECRET }}
             docker push ${{ env.USER_NAME }}/${{ env.API_IMAGE_NAME }}:latest
+            docker push ${{ env.USER_NAME }}/${{ env.FRONTEND_IMAGE_NAME }}:latest
