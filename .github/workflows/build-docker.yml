@@ -19,7 +19,7 @@ jobs:
 
       - name: Build image
         run: |
-          docker build -f api/Dockerfile -t ${{ env.USER_NAME }}/${{ env.API_IMAGE_NAME }}:latest
+          docker build -f api/Dockerfile -t ${{ env.USER_NAME }}/${{ env.API_IMAGE_NAME }}:latest .
 
       - name: Publish docker image
         run: docker push ${{ env.USER_NAME }}/${{ env.API_IMAGE_NAME }}:latest
