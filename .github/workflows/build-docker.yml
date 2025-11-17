@@ -1,9 +1,14 @@
 name: Build and publish docker image
 
 on:
-  workflow_dispatch:
-  # push:
-  #   branches: ["main"]
+#   workflow_dispatch
+  push:
+    branches: 
+        - main
+    paths:
+        - 'api/**'
+        - 'front-end-nextjs/**'
+
 
 env:
   USER_NAME: therocking
