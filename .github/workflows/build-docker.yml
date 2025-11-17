@@ -22,4 +22,6 @@ jobs:
           docker build -f api/Dockerfile -t ${{ env.USER_NAME }}/${{ env.API_IMAGE_NAME }}:latest .
 
       - name: Publish docker image
-        run: docker push ${{ env.USER_NAME }}/${{ env.API_IMAGE_NAME }}:latest
+        run: |
+            docker login -u ${{ env.USER_NAME }} -p ${{ secrets.DOCKER_HUB_SECRET }}
+            docker push ${{ env.USER_NAME }}/${{ env.API_IMAGE_NAME }}:latest
