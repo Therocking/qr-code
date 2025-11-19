@@ -1,0 +1,33 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: qr-code-frontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: qr-code-frontend
+  template:
+    metadata:
+      labels:
+        app: qr-code-frontend
+    spec:
+      containers:
+      - name: qr-code-frontend
+        image: therocking/qr-code-frontend:latest
+        ports:
+        - containerPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: qr-code-frontend-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: qr-code-frontend
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000

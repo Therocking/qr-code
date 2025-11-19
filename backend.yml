@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: qr-code-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: qr-code-api
+  template:
+    metadata:
+      labels:
+        app: qr-code-api
+    spec:
+      containers:
+      - name: qr-code-api
+        image: therocking/qr-code-api:latest

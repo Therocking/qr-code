@@ -1,5 +1,5 @@
 FROM python:3.9.25-alpine AS build
-EXPOSE 80
+EXPOSE 8000
 
 WORKDIR /usr/src/app
 
